@@ -83,11 +83,9 @@ async function processCitationItem(citation) {
         return retval;
     };
     if ("easyKey" in citation) {
-        const item = await findByEasyKey(citation.easyKey, Zotero);
-        return cloneButSetId(item);
+        return findByEasyKey(citation.easyKey, Zotero).then(cloneButSetId);
     } else if ("key" in citation) {
-        const item = await findByKey(citation.key, Zotero);
-        return cloneButSetId(item);
+        return findByKey(citation.key, Zotero).then(cloneButSetId);
     } else {
         return citation;
     }
